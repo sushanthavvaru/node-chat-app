@@ -1,5 +1,5 @@
 var socket = io();
-
+var params = jQuery.deparam(window.location.search);
 function scrollToBottom () {
   // Selectors
   var messages = jQuery('#messages');
@@ -51,7 +51,12 @@ socket.on('newMessage', function (message) {
     from: message.from,
     createdAt: formattedTime
   });
+  if(message.from !== params.name){
+    console.log(message.name,params.name );
+      var audio = new Audio('audio.mp3');
+      audio.play();
 
+  }
   jQuery('#messages').append(html);
   scrollToBottom();
 });
